@@ -8,15 +8,17 @@ function start(route, handle) {
         var pathname = url.parse(request.url)['pathname'];
 	console.log("request for " + pathname + " received");
 
-        request.setEncoding("utf8");
+        route(pathname, handle, response, postData, request);
 
-        request.addListener("data", function(postDataChunk) {
-            postData += postDataChunk;
-        })
+//        request.setEncoding("utf8");
 
-        request.addListener("end", function() {
-            route(pathname, handle, response, postData);
-        })
+//        request.addListener("data", function(postDataChunk) {
+//            postData += postDataChunk;
+//        })
+
+//        request.addListener("end", function() {
+//            route(pathname, handle, response, postData);
+//        })
     }
 
     http.createServer(onRequest).listen(8080);
